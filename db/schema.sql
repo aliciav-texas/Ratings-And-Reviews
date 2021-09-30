@@ -9,7 +9,7 @@ CREATE TABLE reviews (
     id serial NOT NULL,
     product_id integer,
     rating integer,
-    date varchar(50),
+    epoch bigint,
     summary varchar(300),
     body varchar(2500),
     recommend boolean,
@@ -47,7 +47,7 @@ CREATE TABLE characteristicreviews (
     FOREIGN KEY (characteristic_id) REFERENCES characteristics(id)
 );
 
-\COPY reviews (id, product_id, rating, date, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
+\COPY reviews (id, product_id, rating, epoch, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
 
 \COPY characteristics ( id, product_id, name) FROM '/Users/aliciavillanueva/Desktop/SDC/characteristics.csv' DELIMITER ',' CSV HEADER;
 
