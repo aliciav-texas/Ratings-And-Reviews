@@ -1,0 +1,27 @@
+{
+  "name": "Ratings-And-Reviews",
+  "version": "1.0.0",
+  "description": "A repository for the Ratings and Reviews API",
+  "main": "index.js",
+  "scripts": {
+    "start": "nodemon server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Sturgeon-SDC/Ratings-And-Reviews-API.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Sturgeon-SDC/Ratings-And-Reviews-API/issues"
+  },
+  "homepage": "https://github.com/Sturgeon-SDC/Ratings-And-Reviews-API#readme",
+  "dependencies": {
+    "axios": "^0.21.4",
+    "eslint": "^7.32.0",
+    "express": "^4.17.1",
+    "postgres": "^1.0.2"
+  }
+}
