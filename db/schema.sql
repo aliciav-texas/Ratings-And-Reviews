@@ -18,6 +18,7 @@ CREATE TABLE reviews (
     reviewer_email varchar(100),
     response varchar(2500),
     helpfulness integer,
+    date_written timestamp null default null,
     PRIMARY KEY (id)
 );
 
@@ -48,6 +49,10 @@ CREATE TABLE characteristicreviews (
 );
 
 \COPY reviews (id, product_id, rating, epoch, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
+
+update reviews set date_written = to_timestamp(floor(epoch/1000));
+
+ALTER TABLE reviews DROP COLUMN epoch;
 
 \COPY characteristics ( id, product_id, name) FROM '/Users/aliciavillanueva/Desktop/SDC/characteristics.csv' DELIMITER ',' CSV HEADER;
 
