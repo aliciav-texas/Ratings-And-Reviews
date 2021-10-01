@@ -18,6 +18,20 @@ app.get("/reviews", (req, res) => {
     });
 });
 
+app.put("/report", (req, res) => {
+  Promise.all([db.reportProductReview(1)])
+    .then((successfulReport) => {
+      res.send(
+        `Thanks for your feedback, review with id: ${id} has been reported`
+      );
+    })
+    .catch((errorReportingReview) => {
+      res
+        .status(500)
+        .send(`There was an error making a report to product with id: ${id}`);
+    });
+});
+
 app.listen(port, () => {
   console.log("listening at localhost:3030");
 });
