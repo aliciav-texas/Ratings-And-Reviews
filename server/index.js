@@ -7,19 +7,10 @@ const db = require("./models.js");
 app.use(express.json());
 app.use(cors());
 
-app.get("/reviews", (req, res) => {
-  Promise.all([db.getTestReview(1)])
-    .then((resultOfTest) => {
-      console.log("server", resultOfTest);
-      res.send(resultOfTest);
-    })
-    .catch((errorOnTest) => {
-      res.status(500).send(errorOnTest);
-    });
-});
-
-app.put("/report", (req, res) => {
-  Promise.all([db.reportProductReview(1)])
+app.put("/reviews/report/:id", (req, res) => {
+  let id = req.params.id;
+  console.log(id);
+  Promise.all([db.reportProductReview(id)])
     .then((successfulReport) => {
       res.send(
         `Thanks for your feedback, review with id: ${id} has been reported`
