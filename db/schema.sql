@@ -5,10 +5,12 @@ CREATE DATABASE ratingsandreviews;
 
 \c ratingsandreviews;
 
+DROP TABLE IF EXISTS reviews;
+
 CREATE TABLE reviews (
     id serial NOT NULL,
-    product_id integer,
-    rating integer,
+    product_id integer NOT NULL,
+    rating integer NOT NULL,
     epoch bigint,
     summary varchar(300),
     body varchar(2500),
@@ -17,9 +19,12 @@ CREATE TABLE reviews (
     reviewer_name varchar(60),
     reviewer_email varchar(100),
     response varchar(2500),
-    helpfulness integer,
+    helpfulness integer NOT NULL,
+    date_written timestamp null default null,
     PRIMARY KEY (id)
 );
+
+DROP TABLE IF EXISTS reviewsphotos;
 
 CREATE TABLE reviewsphotos (
     id serial NOT NULL,
@@ -29,6 +34,8 @@ CREATE TABLE reviewsphotos (
     FOREIGN KEY (review_id) REFERENCES reviews(id)
 );
 
+DROP TABLE IF EXISTS characteristics;
+
 CREATE TABLE characteristics (
     id serial NOT NULL,
     product_id integer,
@@ -36,6 +43,7 @@ CREATE TABLE characteristics (
     PRIMARY KEY (id)
 );
 
+DROP TABLE IF EXISTS characteristicreviews;
 
 CREATE TABLE characteristicreviews (
     id serial NOT NULL,
@@ -48,6 +56,10 @@ CREATE TABLE characteristicreviews (
 );
 
 \COPY reviews (id, product_id, rating, epoch, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
+
+update reviews set date_written = to_timestamp(floor(epoch/1000));
+
+ALTER TABLE reviews DROP COLUMN epoch;
 
 \COPY characteristics ( id, product_id, name) FROM '/Users/aliciavillanueva/Desktop/SDC/characteristics.csv' DELIMITER ',' CSV HEADER;
 
