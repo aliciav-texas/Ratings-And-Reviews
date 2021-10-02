@@ -24,7 +24,6 @@ CREATE TABLE reviews (
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS reviewsphotos;
 
 CREATE TABLE reviewsphotos (
     id serial NOT NULL,
@@ -34,7 +33,6 @@ CREATE TABLE reviewsphotos (
     FOREIGN KEY (review_id) REFERENCES reviews(id)
 );
 
-DROP TABLE IF EXISTS characteristics;
 
 CREATE TABLE characteristics (
     id serial NOT NULL,
@@ -43,7 +41,6 @@ CREATE TABLE characteristics (
     PRIMARY KEY (id)
 );
 
-DROP TABLE IF EXISTS characteristicreviews;
 
 CREATE TABLE characteristicreviews (
     id serial NOT NULL,
@@ -56,6 +53,7 @@ CREATE TABLE characteristicreviews (
 );
 
 \COPY reviews (id, product_id, rating, epoch, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
+
 
 update reviews set date_written = to_timestamp(floor(epoch/1000));
 

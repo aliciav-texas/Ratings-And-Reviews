@@ -13,11 +13,14 @@ app.get("/reviews/:id/list", (req, res) => {
   let id = req.params.id;
   let sort_by = req.query.sort;
   let count = req.query.count;
-
-  console.log("sort", sort_by);
-  console.log("count", count);
-
-  res.send("you hit the param");
+  Promise.all([db.sortReviews(id, sort_by, count)])
+    .then((sortedReviews) => {
+      console.log("sortedReviews", sortedReviews);
+      res.send("success");
+    })
+    .catch((errorSorting) => {
+      console.log("error getting reviews");
+    });
 });
 
 // "product_id": "38322",
