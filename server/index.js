@@ -7,6 +7,19 @@ const db = require("./models.js");
 app.use(express.json());
 app.use(cors());
 
+// Sort reviews (GET)
+app.get("/reviews/:id/list", (req, res) => {
+  //relevant, newest, helpfulness
+  let id = req.params.id;
+  let sort_by = req.query.sort;
+  let count = req.query.count;
+
+  console.log("sort", sort_by);
+  console.log("count", count);
+
+  res.send("you hit the param");
+});
+
 // "product_id": "38322",
 // "ratings": {
 //     "1": "9",
@@ -43,6 +56,8 @@ app.use(cors());
 //Get Meta Data for product (GET)
 app.get("/reviews/:id/meta", (req, res) => {
   let id = req.params.id;
+  res.send("hello");
+  console.log(id);
 });
 
 //Post a Review (POST)
