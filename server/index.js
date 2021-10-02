@@ -15,11 +15,10 @@ app.get("/reviews/:id/list", (req, res) => {
   let count = req.query.count;
   Promise.all([db.sortReviews(id, sort_by, count)])
     .then((sortedReviews) => {
-      console.log("sortedReviews", sortedReviews);
-      res.send("success");
+      res.send(sortedReviews);
     })
     .catch((errorSorting) => {
-      console.log("error getting reviews");
+      res.send(errorSorting);
     });
 });
 
