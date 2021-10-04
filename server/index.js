@@ -22,44 +22,17 @@ app.get("/reviews/:id/list", (req, res) => {
     });
 });
 
-// "product_id": "38322",
-// "ratings": {
-//     "1": "9",
-//     "2": "4",
-//     "3": "8",
-//     "4": "7",
-//     "5": "21"
-// },
-// "recommended": {
-//     "false": "18",
-//     "true": "31"
-// },
-// "characteristics": {
-//     "Fit": {
-//         "id": 128427,
-//         "value": "2.0000000000000000"
-//     },
-//     "Length": {
-//         "id": 128428,
-//         "value": "2.1935483870967742"
-//     },
-//     "Comfort": {
-//         "id": 128429,
-//         "value": "2.8947368421052632"
-//     },
-//     "Quality": {
-//         "id": 128430,
-//         "value": "2.8421052631578947"
-//     }
-// }
-
-// Need to get total nums for all of these (ratings, recommended, characteristics)
-
 //Get Meta Data for product (GET)
 app.get("/reviews/:id/meta", (req, res) => {
   let id = req.params.id;
-  res.send("hello");
-  console.log(id);
+  Promise.all([db.getReviewMetaData(id)])
+    .then((reviewMetaData) => {
+      console.log("success", reviewMetaData);
+      res.send(reviewMetaData[0]);
+    })
+    .catch((errorGettingMetaData) => {
+      res.status(404).send(errorGettingMetaData);
+    });
 });
 
 //Post a Review (POST)
