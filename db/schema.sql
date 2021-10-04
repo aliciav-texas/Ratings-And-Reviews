@@ -5,7 +5,6 @@ CREATE DATABASE ratingsandreviews;
 
 \c ratingsandreviews;
 
-DROP TABLE IF EXISTS reviews;
 
 CREATE TABLE reviews (
     id serial NOT NULL,
@@ -46,7 +45,7 @@ CREATE TABLE characteristicreviews (
     id serial NOT NULL,
     characteristic_id integer,
 	  review_id integer,
-    value varchar(25),
+    value int not null,
     PRIMARY KEY (id),
     FOREIGN KEY (review_id) REFERENCES reviews(id),
     FOREIGN KEY (characteristic_id) REFERENCES characteristics(id)
@@ -54,8 +53,9 @@ CREATE TABLE characteristicreviews (
 
 \COPY reviews (id, product_id, rating, epoch, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
 
-
 update reviews set date_written = to_timestamp(floor(epoch/1000));
+
+SELECT setval(pg_get_serial_sequence('reviews', 'id'), max(id)) FROM reviews;
 
 ALTER TABLE reviews DROP COLUMN epoch;
 
