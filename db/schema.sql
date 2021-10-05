@@ -24,6 +24,7 @@ CREATE TABLE reviews (
 );
 
 CREATE INDEX product_review_index ON reviews(product_id);
+CREATE INDEX review_index ON reviews(id);
 
 CREATE TABLE reviewsphotos (
     id serial NOT NULL,
@@ -33,6 +34,8 @@ CREATE TABLE reviewsphotos (
     FOREIGN KEY (review_id) REFERENCES reviews(id)
 );
 
+CREATE INDEX reviews_photos_index ON reviewsphotos(id);
+CREATE INDEX review_id_index ON reviewsphotos(review_id);
 
 CREATE TABLE characteristics (
     id serial NOT NULL,
@@ -52,6 +55,12 @@ CREATE TABLE characteristicreviews (
     FOREIGN KEY (review_id) REFERENCES reviews(id),
     FOREIGN KEY (characteristic_id) REFERENCES characteristics(id)
 );
+CREATE INDEX product_characteristicreviews_index ON characteristicreviews(id);
+
+CREATE INDEX product_characteristicreviews_char_index ON characteristicreviews(characteristic_id);
+
+CREATE INDEX product_characteristicreviews_review_index ON characteristicreviews(review_id);
+
 
 \COPY reviews (id, product_id, rating, epoch, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
 
