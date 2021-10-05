@@ -50,7 +50,7 @@ const sortReviews = async (id, sort_by, count) => {
       sort_by = "date_written";
     }
     let sortReviewQuery =
-      "select id, product_id, rating, summary, body, recommend, reviewer_name, response, helpfulness, date_written, photos from reviews, lateral ( select json_agg ( json_build_object ( 'id', reviewsphotos.id, 'url', reviewsphotos.url )) as photosArr from reviewsphotos where reviewsphotos.review_id = reviews.id ) as photo where reviews.product_id = $1 order by $2 desc fetch first $3 rows only";
+      "select id, product_id, rating, summary, body, recommend, reviewer_name, response, helpfulness, date_written, photosArr from reviews, lateral ( select json_agg ( json_build_object ( 'id', reviewsphotos.id, 'url', reviewsphotos.url )) as photosArr from reviewsphotos where reviewsphotos.review_id = reviews.id ) as photo where reviews.product_id = $1 order by $2 desc fetch first $3 rows only";
     const sortedReviews = await pool.query(sortReviewQuery, [
       id,
       sort_by,
