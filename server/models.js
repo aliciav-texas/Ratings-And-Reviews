@@ -67,7 +67,8 @@ const sortReviews = async (id, sort_by, count) => {
 //  Post A Review (Insert)
 const postProductReview = async (reviewValues) => {
   let postReviewQuery =
-    "insert into reviews(product_id, rating, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness, date_written) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
+    "insert into reviews(product_id, rating, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness, date_written) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, to_timestamp($11)) returning *";
+
   try {
     const successfulReviewPost = await pool.query(
       postReviewQuery,

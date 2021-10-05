@@ -54,7 +54,7 @@ app.post("/reviews/:id", (req, res) => {
 
   Promise.all([db.postProductReview(valuesForReviewPost)])
     .then((successfulReviewPost) => {
-      res.send("You successfully posted a review ");
+      res.send("success posting your review: ", successfulReviewPost);
     })
     .catch((errorPostingReview) => {
       res.status(409).send("Failed to post your review");
