@@ -65,9 +65,7 @@ app.put("/reviews/report/:id", (req, res) => {
   let id = req.params.id;
   Promise.all([db.reportProductReview(id)])
     .then((successfulReport) => {
-      res.send(
-        `Thanks for your feedback, review with id: ${id} has been reported`
-      );
+      res.send(successfulReport);
     })
     .catch((errorReportingReview) => {
       res

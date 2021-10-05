@@ -83,7 +83,8 @@ const postProductReview = async (reviewValues) => {
 
 //  Report A Review (Update)
 const reportProductReview = async (id) => {
-  let reportProductReviewQuery = "Update reviews set reported=true where id=$1";
+  let reportProductReviewQuery =
+    "Update reviews set reported=true where id=$1 returning *";
   try {
     const successfulReport = await pool.query(reportProductReviewQuery, [id]);
     return successfulReport;
