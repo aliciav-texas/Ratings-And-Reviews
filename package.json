@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "start": "nodemon server",
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -23,7 +23,9 @@
     "cors": "^2.8.5",
     "eslint": "^7.32.0",
     "express": "^4.17.1",
+    "jest": "^27.2.4",
     "pg": "^8.7.1",
-    "postgres": "^1.0.2"
+    "postgres": "^1.0.2",
+    "supertest": "^6.1.6"
   }
 }
