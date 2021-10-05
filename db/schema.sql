@@ -23,6 +23,7 @@ CREATE TABLE reviews (
     PRIMARY KEY (id)
 );
 
+CREATE INDEX product_review_index ON reviews(product_id);
 
 CREATE TABLE reviewsphotos (
     id serial NOT NULL,
@@ -39,6 +40,7 @@ CREATE TABLE characteristics (
     name varchar(50),
     PRIMARY KEY (id)
 );
+CREATE INDEX product_characteristics_index ON characteristics(product_id);
 
 
 CREATE TABLE characteristicreviews (

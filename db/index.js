@@ -17,7 +17,7 @@ pool
     console.log("Connected to postgres");
   })
   .catch(() => {
-    console.log("failed to connect to postgres");
+    console.log("Failed to connect to postgres");
   });
 
 module.exports = pool;
