@@ -67,7 +67,8 @@ const sortReviews = async (id, sort_by, count) => {
 //  Post A Review (Insert)
 const postProductReview = async (reviewValues) => {
   let postReviewQuery =
-    "insert into reviews(product_id, rating, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness, date_written) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11)";
+    "insert into reviews(product_id, rating, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness, date_written) values ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, current_timestamp) returning *";
+
   try {
     const successfulReviewPost = await pool.query(
       postReviewQuery,
@@ -75,13 +76,15 @@ const postProductReview = async (reviewValues) => {
     );
     return successfulReviewPost;
   } catch (errorPostingReview) {
+    console.log("error", errorPostingReview);
     return errorPostingReview;
   }
 };
 
 //  Report A Review (Update)
 const reportProductReview = async (id) => {
-  let reportProductReviewQuery = "Update reviews set reported=true where id=$1";
+  let reportProductReviewQuery =
+    "Update reviews set reported=true where id=$1 returning *";
   try {
     const successfulReport = await pool.query(reportProductReviewQuery, [id]);
     return successfulReport;
