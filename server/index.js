@@ -49,12 +49,11 @@ app.post("/reviews/:id", (req, res) => {
     req.body.email,
     null,
     0,
-    Date.now(),
   ];
 
   Promise.all([db.postProductReview(valuesForReviewPost)])
     .then((successfulReviewPost) => {
-      res.send("success posting your review: ", successfulReviewPost);
+      res.send(successfulReviewPost);
     })
     .catch((errorPostingReview) => {
       res.status(409).send("Failed to post your review");
