@@ -13,6 +13,7 @@ app.get("/reviews/:id/list", async (req, res) => {
     let id = req.params.id;
     let sort_by = req.query.sort;
     let count = req.query.count;
+
     const sortedReviews = await db.sortReviews(id, sort_by, count);
     res.send(sortedReviews);
   } catch (errorSorting) {
