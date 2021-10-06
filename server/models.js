@@ -50,7 +50,7 @@ const sortReviews = async (id, sort_by, count) => {
       sort_by = "date_written";
     }
     let sortReviewQuery =
-      "select id, product_id, rating, summary, body, recommend, reviewer_name, response, helpfulness, date_written, photosArr from reviews, lateral ( select json_agg ( json_build_object ( 'id', reviewsphotos.id, 'url', reviewsphotos.url )) as photosArr from reviewsphotos where reviewsphotos.review_id = reviews.id ) as photo where reviews.product_id = $1 order by $2 desc fetch first $3 rows only";
+      "select id, product_id, rating, summary, body, recommend, reviewer_name, response, helpfulness, date_written, photosArr from reviews, lateral ( select json_agg ( json_build_object ( 'id', reviewsphotos.id, 'url', reviewsphotos.url )) as photosArr from reviewsphotos where reviewsphotos.review_id = reviews.id ) as photo where reviews.product_id = $1 order by $2 desc limit $3";
     const sortedReviews = await pool.query(sortReviewQuery, [
       id,
       sort_by,
@@ -82,7 +82,7 @@ const postProductReview = async (reviewValues) => {
 const reportProductReview = async (id) => {
   try {
     let reportProductReviewQuery =
-      "Update reviews set reported=true where id=$1 returning *";
+      "Update reviews set reported=true where id=$1";
     const successfulReport = await pool.query(reportProductReviewQuery, [id]);
     return successfulReport.rows[0];
   } catch (errorReportingReview) {
