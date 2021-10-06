@@ -1,0 +1,26 @@
+config:
+  target: "http:localhost:3030/reviews"
+  phases:
+    - duration: 60
+      arrivalRate: 5
+      name: Warm up
+    - duration: 120
+      arrivalRate: 5
+      rampTo: 100
+      name: Ramp up load
+    - duration: 240
+      arrivalRate: 50
+      name: Sustained load
+  payload:
+    path: "reviews.csv"
+    fields:
+      - "product_id"
+scenarios:
+  - name: "Get meta data for a given product"
+    flow:
+      - get:
+          url: "/{{product_id}}/meta"
+          capture:
+            - json: "$.results[0].product_id"
+              as: "productID"
+      - think: 5
