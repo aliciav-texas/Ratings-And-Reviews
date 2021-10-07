@@ -1,8 +1,8 @@
-# Galvanize Hack Reactor Front End Capstone
+# Galvanize Hack Reactor System Design Capstone
 
 <br />
 
-## Project Catwalk
+## Ratings and Reviews -- PostgreSQL
 
 <br>
 
