@@ -6,6 +6,11 @@ const db = require("./models.js");
 app.use(express.json());
 app.use(cors());
 
+// ==== Test Path for Deployment ==== //
+app.get("/test", async (req, res) => {
+  res.send("You hit your test path!");
+});
+
 // Sort reviews (GET)
 app.get("/reviews/:id/list", async (req, res) => {
   try {
