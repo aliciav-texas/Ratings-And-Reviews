@@ -65,6 +65,8 @@ CREATE INDEX product_characteristicreviews_char_index ON characteristicreviews(c
 CREATE INDEX product_characteristicreviews_review_index ON characteristicreviews(review_id);
 
 
+
+
 \COPY reviews (id, product_id, rating, epoch, summary, body, recommend, reported, reviewer_name, reviewer_email, response, helpfulness) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews.csv' DELIMITER ',' CSV HEADER;
 
 update reviews set date_written = to_timestamp(floor(epoch/1000));
@@ -80,4 +82,5 @@ ALTER TABLE reviews DROP COLUMN epoch;
 \COPY characteristicreviews (id, characteristic_id, review_id, value) FROM '/Users/aliciavillanueva/Desktop/SDC/characteristic_reviews.csv' DELIMITER ',' CSV HEADER;
 
 \COPY reviewsphotos (id, review_id, url) FROM '/Users/aliciavillanueva/Desktop/SDC/reviews_photos.csv' DELIMITER ',' CSV HEADER;
+
 

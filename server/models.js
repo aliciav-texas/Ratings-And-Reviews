@@ -23,6 +23,7 @@ const getReviewMetaData = async (id) => {
       pool.query(recommendedQuery, [id]),
       pool.query(characteristicsQuery, [id]),
     ]);
+    console.log("meta", metaReviewData);
     metaReviewData[0].rows.forEach((ratingSum) => {
       metaReviewObj.ratings.push(ratingSum.ratingssum);
     });
@@ -56,6 +57,7 @@ const sortReviews = async (id, sort_by, count) => {
       sort_by,
       count,
     ]);
+
     return sortedReviews.rows;
   } catch (errorGettingReviews) {
     return errorGettingReviews.stack;
