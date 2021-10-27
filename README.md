@@ -1,10 +1,23 @@
-# System Design For E-Commerce Application
+# System Design For Back End Services
 
 <br />
 
-## Ratings and Reviews -- PostgreSQL
+## Ratings and Reviews
 
-<br>
+Architected the backend services for an e-commerce application experiencing a great increase in traffic in a minimal working time fram. Re-designed back end with a relational database, PostgreSQL, and used ETL to handle a handle a minimum of 5 million to a max of 19 million rows of product information to match response needs for client. Reduced latency from 15 s to 30 ms by identifying bottleneck within query and refactoring schema with indexing. Improved data accuracy and API response accuracy through testing with Jest and Artillery and data watching with New Relic. Deployed two AWS EC2 instances to begin process of horizontal scaling and load balancing
+
+## Tech Stack
+
+- [Postgres](https://www.postgresql.org/)
+- [Axios](https://axios-http.com/)
+- [Express](https://expressjs.com/)
+
+## Testing
+
+- [Jest](https://jestjs.io/)
+- [Artillery](https://artillery.io/)
+- [NewRelic](https://newrelic.com/)
+  <br>
 
 <!-- CONTACT -->
 
@@ -16,6 +29,8 @@
 
 [![linkedin-shield]][alicia-linkedin]
 [![github-shield]][alicia-github]
+
+[Engerineering Journal for System Design](https://docs.google.com/document/d/1lBibL5kW56Rco2pGoTQBnXFx-gwx-xmZXGX-C2XJlgI/edit?usp=sharing)
 
 <br>
 
