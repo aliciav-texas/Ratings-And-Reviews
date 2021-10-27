@@ -1,4 +1,4 @@
-# Galvanize Hack Reactor System Design Capstone
+# System Design For E-Commerce Application
 
 <br />
 
